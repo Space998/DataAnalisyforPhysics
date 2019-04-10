@@ -5,4 +5,4 @@ if len(sys.argv) != 2:
     exit()
 
 print ("Nome del file:",sys.argv[1])
-    
+print ("Test")    
