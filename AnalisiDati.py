@@ -1,4 +1,4 @@
-from data import Data
+from dataErr import Data
 import sys
 
 if len(sys.argv) != 2:
@@ -8,16 +8,17 @@ if len(sys.argv) != 2:
 print ("Nome del file:",sys.argv[1])
 
 #test data.py class
-d = Data(12, 5, "A", "m")
+d = Data(12, 5)
 print (d)
-e = Data(11, 4, "A", "m")
+e = Data(11, 4)
 print(e)
 print("Somma: ", d + e)
 print("Sottrazione: ", d - e)
 print("Moltiplicazione: ", d * e)
 print("Divisione: ", d/e)
+print("Prova: ", d*2)
 #print(2/4)
 
-f = Data(10, 4, "B", "m")
+f = Data(10, 4)
 print(f)
 print(d+f)
