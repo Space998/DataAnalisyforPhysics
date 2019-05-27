@@ -1,11 +1,14 @@
 from dataErr import Data
 import sys
+import genericFunctions 
 
-if len(sys.argv) != 2:
-    print ("Errore inserire nome del file")
-    exit()
+print(genericFunctions.checkFile())
 
-print ("Nome del file:",sys.argv[1])
+#if len(sys.argv) != 2:
+#    print ("Errore inserire nome del file")
+#    exit()
+
+#print ("Nome del file:",sys.argv[1])
 
 #test data.py class
 d = Data(12, 5)
