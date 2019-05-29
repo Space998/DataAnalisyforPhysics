@@ -9,7 +9,7 @@ def checkFile():
         if os.path.isfile(sys.argv[1]):
             file = open(sys.argv[1], 'r')
             line = file.readline()
-            if line.split('\n')[0] == "DATA ANALISY":
+            if line.split()[0] == "DATA" and line.split()[1] == "ANALISY":
                 return sys.argv[1]
                 file.close()
             else:
