@@ -4,6 +4,11 @@ import genericFunctions
 
 print(genericFunctions.checkFile())
 
+instruction = genericFunctions.checkFile()
+formatInstruction = genericFunctions.formatFile(instruction)
+
+print(formatInstruction)
+
 #if len(sys.argv) != 2:
 #    print ("Errore inserire nome del file")
 #    exit()
