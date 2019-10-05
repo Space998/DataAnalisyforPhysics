@@ -1,0 +1,26 @@
+    def __add__(self, other): #override of add method
+        newValue = self._value + other._value
+        newError= self._error + other._error
+        return Data(newValue, newError)
+
+    def __sub__(self, other):
+        newValue = self._value - other._value
+        newError= self._error + other._error
+        return Data(newValue, newError)
+
+    def __mul__(self, other):
+        newValue = self._value * other._value
+        newError = newValue * (self.get_RelError() + other.get_RelError())
+        return Data(newValue, newError)
+    
+    def __mul__(self, int):
+        newValue = self._value
+        newError = self._error
+        return Data(newValue, newError)
+
+
+    def __truediv__(self, other):
+        newValue = self._value / other._value
+        newError = newValue * (self.get_RelError() + other.get_RelError())
+        return Data(newValue, newError)
+

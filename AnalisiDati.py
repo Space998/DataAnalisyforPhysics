@@ -25,7 +25,28 @@ print("Sottrazione: ", d - e)
 print("Moltiplicazione: ", d * e)
 print("Divisione: ", d/e)
 print("Prova: ", d*2)
+print("Prova: ", 2*d)
+
+print("Somma: ", d + 10)
+print("Somma: ", 10 + d)
 #print(2/4)
+print("Somma: ", d - 10)
+print("Somma: ", 10 - d)
+
+print("Somma: ", d / 10)
+print("Somma: ", 10 / d)
+
+print("Somma: ", d ** 2)
+print("Somma: ", 2 ** d)
+
+print(-d)
+print(~2)
+
+e += 1
+
+print("Test: ", (d + 8) * 5)
+print("Test: ", d + 8 * 5)
+print("e: ", e)
 
 f = Data(10, 4)
 print(f)

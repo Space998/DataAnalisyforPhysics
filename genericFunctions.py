@@ -11,8 +11,8 @@ def checkFile():
             file = open(sys.argv[1], 'r')
             line = file.readline()
             if line.split()[0] == "DATA" and line.split()[1] == "ANALISY":
-                return sys.argv[1]
                 file.close()
+                return sys.argv[1]
             else:
                 sys.exit("The input file is not formatted correctly for the data analisy")
         else:

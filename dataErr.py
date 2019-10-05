@@ -8,48 +8,46 @@ Class for a Physical data with: value, error
 
 class Data(object):
 
-    def __init__(self, value, error):
+    def __init__(self, value, error = 0):
         self._value = value
         self._error = error
 
+    def __repr__(self):
+        return "Data({}, {})".format(repr(self._value), repr(self._error))
+
 #methods to get class' parameters
-    def getValue(self):
+    def get_Value(self):
         return self._value
 
-    def getError(self):
+    def get_Error(self):
         return self._error
     
-    #methods that work on class' parameters
-    def getRelError(self):
+#methods that work on class' parameters
+    def get_RelError(self):
         return self._error/self._value
 
-    #override of standard methods
-    def __str__(self): #print method
+#override of standard methods
+    def __str__(self): #print method.
         result = str(self._value) + " " + u"\u00B1" + " " + str(self._error)
         return result
 
-    def __add__(self, other): #override of add method
-        newValue = self._value + other._value
-        newError= self._error + other._error
-        return Data(newValue, newError)
+#invert(n) = -n -1
+def make_func(name):
+    #return lambda self, *args: Data(getattr(self._value, name)(*args), self._error)
+    def func(self, *args):
+        a = Data(self._value, self._error)
+        if len(args) == 0:
+            a._value = getattr(a._value, name)()
+            return a
+        for i in args:
+            if not isinstance(i, Data):
+                i = Data(i)
+            a._value = getattr(a._value, name)(i._value)
+            a._error += i._error
+        return a
+    return func     
 
-    def __sub__(self, other):
-        newValue = self._value - other._value
-        newError= self._error + other._error
-        return Data(newValue, newError)
-
-    def __mul__(self, other):
-        newValue = self._value * other._value
-        newError = newValue * (self.getRelError() + other.getRelError())
-        return Data(newValue, newError)
-    
-    def __mul__(self, int):
-        newValue = self._value
-        newError = self._error
-        return Data(newValue, newError)
+for name in ["__add__", "__radd__", "__sub__", "__rsub__", "__mul__", "__rmul__", "__rtruediv__", "__truediv__", "__pow__", "__rpow__", "__neg__", "__pos__"]:
+    setattr(Data, name, make_func(name))  
 
 
-    def __truediv__(self, other):
-        newValue = self._value / other._value
-        newError = newValue * (self.getRelError() + other.getRelError())
-        return Data(newValue, newError)
