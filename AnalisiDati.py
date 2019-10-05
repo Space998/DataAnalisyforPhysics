@@ -46,8 +46,27 @@ e += 1
 
 print("Test: ", (d + 8) * 5)
 print("Test: ", d + 8 * 5)
-print("e: ", e)
+print("e: ",e)
+print(e + 13)
+print(e +100)
 
-f = Data(10, 4)
-print(f)
-print(d+f)
+print(d.sqrt())
+print(d.sqrt(3))
+print(d)
+print(d.sin())
+print(d.cos())
+print(d.exp())
+
+print(d+12)
+print((d+12).sin())
+
+a = (12+d).sin()
+print(a)
+print(a*2)
+print(2*a)
+
+print(d)
+print(d + 36)
+print((d+36).sin())
+print((a*2).sin())
+
