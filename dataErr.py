@@ -1,7 +1,6 @@
 """
-File: data.py
+File: dataErr.py
 Author: Davide Rolino
-Last modified: 13/04/19
 Class for a Physical data with: value, error
     for the moment the class will only work with maximum errors (not 3 sigma errors), also the formula for the propagation of the errors will be the ones approximate and not the one that involves the derivatives
 """
@@ -9,7 +8,6 @@ Class for a Physical data with: value, error
 import math
 
 class Data(object):
-
     def __init__(self, value, error = 0):
         self._value = value
         self._error = error

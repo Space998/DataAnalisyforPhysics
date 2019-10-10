@@ -12,7 +12,7 @@ def checkFile():
             line = file.readline()
             if line.split()[0] == "DATA" and line.split()[1] == "ANALISY":
                 file.close()
-                return sys.argv[1]
+                return sys.argv[1] #return file
             else:
                 sys.exit("The input file is not formatted correctly for the data analisy")
         else:
@@ -24,11 +24,14 @@ def formatFile(originalFile):
     file = open(originalFile, 'r')      #opening and reading of the file
     originalFile = file.read()
     
-    originalFile = originalFile.replace('@@', '\n@@')       #eliminates inline comments       
-    originalList= originalFile.split('\n')                  #create a list by splitting the file at the end of the lines
-    
+    #originalFile = originalFile.replace('@@', '\n@@')             
+    originalFile = re.sub('@@[^#]','\n@@ ',originalFile)        #eliminates inline comments 
+    originalFile = re.sub('@@#','\n@@#\n ',originalFile)        #start to eliminate multiline comments
+    originalFile = re.sub('@@#[\s\w]*?@@#','',originalFile)     #eliminate multiline comments  
+    originalList= originalFile.split('\n')                      #create a list by splitting the file at the end of the lines
+    print(originalFile)
 
-    program = list(filter(lambda x: not re.match(r'^\s*$', x) and not x.startswith('@@'),originalList))         #eliminates the comments and the empty lines
+    program = list(filter(lambda x: not re.match(r'^\s*$', x) and not x.startswith('@@ '),originalList))         #eliminates the comments and the empty lines
     
     return program
 

@@ -5,6 +5,28 @@ Test @@Cows
 Comm1 XXXX
 
 Comm2 zzzzz
-Comm3 llll< @@end needed
+Comm3 llll< @@ end needed
+
+@@# casa
+m
+m
+m
+m
+m
+@@#
 
 
+FUNCTION x + y**2
+
+NEWDATA Set Test1 m Test2 m Test3 m Test4 m
+2 # 2 # 3 2
+2
+2
+2
+2
+2
+END 
+
+@@[NEWDATA, obj] obj[]
+
+PRINTDATA Set

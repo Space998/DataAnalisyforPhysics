@@ -1,6 +1,10 @@
+#ottimizzare tutti gli output con le f stringhe
+
 from dataErr import Data
+from dataList import DList
 import sys
 import genericFunctions 
+import operatingFunctions
 
 print(genericFunctions.checkFile())
 
@@ -8,6 +12,7 @@ instruction = genericFunctions.checkFile()
 formatInstruction = genericFunctions.formatFile(instruction)
 
 print(formatInstruction)
+print(type(formatInstruction))
 
 #if len(sys.argv) != 2:
 #    print ("Errore inserire nome del file")
@@ -69,4 +74,6 @@ print(d)
 print(d + 36)
 print((d+36).sin())
 print((a*2).sin())
+
+operatingFunctions.operation(formatInstruction)
 
