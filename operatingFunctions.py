@@ -55,11 +55,12 @@ def printData(set):
         for i in dataSet._set:
             print(i._name, ' ', i._unit, '\t\u03C3Err(', i._name, ')', end = '\t')
         print()
-        for i in range(len(dataSet._set)):
-            #rint(len(dataSet._set[0]._list))
-            for n in range(len(dataSet._set[0]._list)):
-                #print(dataSet._set[0]._list)
+        for n in range(len(dataSet._set[0]._list)):
+            #print(len(dataSet._set[0]._list))
+            for i in range(len(dataSet._set)):
                 #print('--', n)
+                #print('##',dataSet._set[i]._list)
+                #print(dataSet._set[i]._list[n]._value)
                 print(dataSet._set[i]._list[n]._value, '\t', dataSet._set[i]._list[n]._error, end = '\t')
             print()
 
