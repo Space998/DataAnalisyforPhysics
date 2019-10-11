@@ -38,4 +38,5 @@ END
 PRINTDATA Set
 
 STARTANALISY
-FUNCTION Set TestR Test1 + Test2**2
+FUNCTION Set TestR Test1_s + Test2_s**2
+PRINTDATA Set
