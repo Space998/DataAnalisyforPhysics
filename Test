@@ -16,21 +16,21 @@ m
 @@#
 
 NEWDATA Set Test1 m Test2 m Test3 m Test4 m
-2 # 2 # 3 2
-2
-2
-2
-2
-2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
 END 
 
 NEWDATA Set1 Test11 m Test12 m Test13 m Test14 m
-2 # 2 # 3 2
-2
-2
-2
-2
-2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
+2 # 2 # 3 2 3 2
 END 
 
 @@[NEWDATA, obj] obj[]

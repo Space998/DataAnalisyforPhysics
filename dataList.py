@@ -5,7 +5,7 @@ Class for list of data.
 """
 
 class DList(object):
-    def __init__(self, name, unit):
+    def __init__(self, name, unit='user'):
         self._name = name
         self._unit = unit #defite the mesure unit of the list of data
         self._list = []
