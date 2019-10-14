@@ -8,7 +8,9 @@ import genericFunctions
 from sympy.parsing.sympy_parser import parse_expr
 #from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application, parse_expr
 #init_printing(use_unicode=True)
+import re
 
+#creation of the dictionari that will contain all the dataSet
 dataSet_dict = {}
 
 def operation(file):
@@ -85,11 +87,13 @@ def function(expr):
     expr1 = 'sqrt('
     for i in dataSet_dict:
         for j in dataSet_dict[i]._set:
-            if str(j._name+'_s') in expr:
-                expr1 = expr1 + '((' + str(diff(expr, j._name+'_s')) + ')' + '*(' + str(j._name+'_s') + '_error)**2)' + ' + '
+            if str(j._name) in expr:
+                expr = re.sub(j._name,j._name+'_s',expr)
                 variable.append(j._name+'_s')
                 errVariable.append(j._name+'_s')
                 errVariable.append(str(j._name+'_s') + '_error')
+        for n in variable:
+            expr1 = expr1 + '((' + str(diff(expr, n)) + ')' + '*(' + str(n) + '_error)**2)' + ' + '
     expr1 = ' '.join(expr1.split(' ')[:-2]) + ')'
     #print(expr)
     #print(expr1)

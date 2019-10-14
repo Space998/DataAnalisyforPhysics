@@ -11,8 +11,7 @@ def checkFile():
             file = open(sys.argv[1], 'r')
             line = file.readline()
             if line.split()[0] == "DATA" and line.split()[1] == "ANALISY":
-                file.close()
-                return sys.argv[1] #return file
+                return file #return file
             else:
                 sys.exit("The input file is not formatted correctly for the data analisy")
         else:
@@ -21,12 +20,11 @@ def checkFile():
 def formatFile(originalFile):
     """Return a object containing only the information needed by the program/interpreter for the data analisy. 
     Opens the file specified by the user and formats it by removing all the comments and the blank lines, then returns a list whose elements are the lines of the formatted file."""
-    file = open(originalFile, 'r')      #opening and reading of the file
-    originalFile = file.read()
+    originalFile = originalFile.read()
     
     #originalFile = originalFile.replace('@@', '\n@@')             
     originalFile = re.sub('@@#','\n@@#\n ',originalFile)        #start to eliminate multiline comments
-    originalFile = re.sub('@@#[\s\w]*?@@#','',originalFile)     #eliminate multiline comments  
+    originalFile = re.sub('@@#[\\s\\w]*?@@#','',originalFile)     #eliminate multiline comments  
     originalFile = re.sub('@@','\n@@ ',originalFile)            #eliminates inline comments 
     originalList= originalFile.split('\n')                      #create a list by splitting the file at the end of the lines
     #print(originalFile)

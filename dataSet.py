@@ -12,7 +12,7 @@ class DSet(object):
 
 #methods to get class' parameters
     def get_Name(self):
-        return self._namet
+        return self._name
 
     def get_List(self):
         return self._set
