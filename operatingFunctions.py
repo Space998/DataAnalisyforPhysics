@@ -1,4 +1,3 @@
-from dataErr import Data
 from dataList import DList
 from dataSet import DSet
 from sympy import *
@@ -9,6 +8,10 @@ from sympy.parsing.sympy_parser import parse_expr
 #from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application, parse_expr
 #init_printing(use_unicode=True)
 import re
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 
 #creation of the dictionari that will contain all the dataSet
 dataSet_dict = {}
@@ -46,9 +49,12 @@ def newData(data):
         for n in range(0,len(value),2):
             #print(n, dataSet._set[int(n/2)]._name)
             if value[n+1] == '#':
-                dataSet._set[int(n/2)]._list.append(Data(value[n]))
+                dataSet._set[int(n/2)]._valueList.append(value[n])
+                dataSet._set[int(n/2)]._errorList.append(0)
+
             else:
-                dataSet._set[int(n/2)]._list.append(Data(value[n],value[n+1]))
+                dataSet._set[int(n/2)]._valueList.append(value[n])
+                dataSet._set[int(n/2)]._errorList.append(value[n+1])
 
 def printData(set):
     for j in range(len(set)):
@@ -57,13 +63,13 @@ def printData(set):
         for i in dataSet._set:
             print(i._name, ' ', i._unit, '\t\u03C3Err(', i._name, ')', end = '\t')
         print()
-        for n in range(len(dataSet._set[0]._list)):
+        for n in range(len(dataSet._set[0]._valueList)):
             #print(len(dataSet._set[0]._list))
             for i in range(len(dataSet._set)):
                 #print('--', n)
                 #print('##',dataSet._set[i]._list)
                 #print(dataSet._set[i]._list[n]._value)
-                print(dataSet._set[i]._list[n]._value, '\t', dataSet._set[i]._list[n]._error, end = '\t')
+                print(dataSet._set[i]._valueList[n], '\t', dataSet._set[i]._errorList[n], end = '\t')
             print()
 
 def startAnalisy(null):
@@ -102,22 +108,23 @@ def function(expr):
     errVariable_dict = {}
     func = parse_expr(expr)
     func1 = parse_expr(expr1)
-    for j in range(len(dataSet._set[0]._list)):
+    for j in range(len(dataSet._set[0]._valueList)):
         for i in variable:
-            variable_dict[i] = dataSet._set[0]._list[j]._value
+            variable_dict[i] = dataSet._set[0]._valueList[j]
         for i in errVariable:
             if '_error' not in i:
-                errVariable_dict[i] = dataSet._set[0]._list[j]._value
+                errVariable_dict[i] = dataSet._set[0]._valueList[j]
             else: 
-                errVariable_dict[i] = dataSet._set[0]._list[j]._error
+                errVariable_dict[i] = dataSet._set[0]._errorList[j]
         #print(func.evalf(subs=variable_dict))
         #print(func1)
         #print(func1.evalf(subs=errVariable_dict))
-        newDList._list.append(Data(func.evalf(subs=variable_dict),func1.evalf(subs=errVariable_dict)))
+        newDList._valueList.append(func.evalf(subs=variable_dict))
+        newDList._errorList.append(func1.evalf(subs=errVariable_dict))
     #print(variable_dict)
     #print(errVariable_dict)
     #print(newDList._list)
-    print(newDList._list)
+    #print(newDList._valueList)
     dataSet._set.append(newDList)
     ''' 
     print(expr1)
@@ -132,7 +139,29 @@ def function(expr):
             newDList._list.append(Data(func(variable[i]._list[j]._value)))
     '''
         
+def simplePlot(info):
+    dataSet = dataSet_dict[info[0]]
+    for i in range(len(dataSet._set)):
+        if dataSet._set[i]._name == info[1]:
+            y = dataSet._set[i]._valueList
+            print(y)
+            yname = dataSet._set[i]._name+' '+dataSet._set[i]._unit
+    for i in range(len(dataSet._set)):
+        if dataSet._set[i]._name == info[2]:
+            x = dataSet._set[i]._valueList
+            print(x)
+            xname = dataSet._set[i]._name+' '+dataSet._set[i]._unit
+    title1 = ' '.join(info[3:])
+    title2 = ''.join(info[3:])
+    fig, ax = plt.subplots()
+    ax.plot(x,y)
 
+    ax.set(xlabel= xname, ylabel= yname,
+        title= title1)
+    ax.grid()
 
-functionDict = {'PRINTDATA': printData, 'STARTANALISY': startAnalisy, 'FUNCTION': function}
+    fig.savefig(title2+".png")
+    plt.show()
+
+functionDict = {'PRINTDATA': printData, 'STARTANALISY': startAnalisy, 'FUNCTION': function, 'SIMPLEPLOT': simplePlot}
 #add ability to create custom dataSets  
