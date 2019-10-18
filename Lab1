@@ -36,7 +36,22 @@ END
 PRINTDATA Dati
 
 STARTANALISY
+FUNCTION Dati I0 Current / VoltageRed
 
 PRINTDATA Dati
 
-SIMPLEPLOT Dati Current VoltageRed Grafico di prova
+PLOT Dati 
+Grafico di Prova
+Voltage VoltageRed 
+Current RedDiod Current
+Add caso
+END
+
+@@#
+@@PLOT Set 
+@@title
+@@xname xList 
+@@yname legendName yList (color)
+@@legendName yListN (color)
+@@END
+@@#
