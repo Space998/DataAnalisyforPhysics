@@ -36,15 +36,19 @@ END
 PRINTDATA Dati
 
 STARTANALISY
-FUNCTION Dati I0 Current / VoltageRed
+FUNCTION Dati I0 mA Current * VoltageRed
 
 PRINTDATA Dati
+
+@@#
+Mucca
+@@#
 
 PLOT Dati 
 Grafico di Prova
 Voltage VoltageRed 
 Current RedDiod Current
-Add caso
+I0 I0
 END
 
 @@#
@@ -55,3 +59,5 @@ END
 @@legendName yListN (color)
 @@END
 @@#
+cc
+
