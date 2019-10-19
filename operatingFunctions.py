@@ -86,6 +86,21 @@ def printData(set):
                 #print(dataSet._set[i]._list[n]._value)
                 print(dataSet._set[i]._valueList[n], '\t', dataSet._set[i]._errorList[n], end = '\t')
             print()
+        print()
+    else:
+        for i in set[1:]:
+            print(dataSet._set[i]._name, ' ', dataSet._set[i]._unit, '\t\u03C3Err(', dataSet._set[i]._name, ')', end = '\t')
+        print()
+        for n in range(len(list(dataSet._set.values())[0]._valueList)):
+            #print(len(dataSet._set[0]._list))
+            for i in set[1:]:
+                #print('--', n)
+                #print('##',dataSet._set[i]._list)
+                #print(dataSet._set[i]._list[n]._value)
+                print(dataSet._set[i]._valueList[n], '\t', dataSet._set[i]._errorList[n], end = '\t')
+            print()
+        print()
+
 
 def startAnalisy(null):
     for i in dataSet_dict:
@@ -195,9 +210,11 @@ def newPlot(info):
             ylabel1 = info[4+i].split()[0]
             y1 = dataSet._set[info[4+i].split()[1]]._valueList
             plt.plot(x,y1,label=ylabel1)
+        else:
+            print("Can't plot ", dataSet._set[info[3].split()[2]]._name, " with ", dataSet._set[info[4+i].split()[1]]._name, " because don't have the same unit of measurement")
     plt.grid()
     plt.legend()
-    plt.savefig(title1, dpi=1000)
+    plt.savefig(title1, dpi=100)
     #plt.show()
     '''
     ax.set(xlabel= xname, ylabel= yname,
