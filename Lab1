@@ -39,6 +39,7 @@ STARTANALISY
 FUNCTION Dati I0 mA Current * VoltageRed
 
 PRINTDATA Dati
+PRINTDATA Dati Current I0
 
 @@#
 Mucca
