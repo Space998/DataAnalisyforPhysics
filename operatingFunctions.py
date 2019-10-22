@@ -43,33 +43,57 @@ def operation(file):
 
 def newData(data):
     names = data[0].split()
-    if names[1] not in dataSet_dict:
-        dataSet_dict[names[1]] = DSet(names[1])
-    dataSet = dataSet_dict[names[1]]
-    num = len(data[1:])
-    #print(num)
-    for i in range(0,len(names[2:]),2):
-        dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
-        #print(dataSet._set[names[i+2]]._name)  
-        dataSet._set[names[i+2]]._valueList = np.zeros(num)
-        dataSet._set[names[i+2]]._errorList = np.zeros(num)
-    for i in range(num):
-        value = data[i+1].split()
-        #print('--',value)
-        #for j in range(len(dataSet._set)):
-        #    print('--',j)
-        j = 0
-        for name in dataSet._set:
-            #print(name)
-            #print(j)
-            #print(n, dataSet._set[int(n/2)]._name)
-            if value[j+1] == '#':
+    if names[1] == '-noerr': #creation list of data without errors, all equal to 0
+        if names[2] not in dataSet_dict:
+            dataSet_dict[names[2]] = DSet(names[2])
+        dataSet = dataSet_dict[names[2]]
+        num = len(data[1:])
+        for i in range(0,len(names[3:]),2):
+            dataSet._set[names[i+3]] = DList(names[i+3], names[i+4])
+            #print(dataSet._set[names[i+2]]._name)  
+            dataSet._set[names[i+3]]._valueList = np.zeros(num)
+            dataSet._set[names[i+3]]._errorList = np.zeros(num)
+        for i in range(num):
+            value = data[i+1].split()
+            #print('--',value)
+            #for j in range(len(dataSet._set)):
+            #    print('--',j)
+            j = 0
+            for name in dataSet._set:
+                #print(name)
+                #print(j)
+                #print(n, dataSet._set[int(n/2)]._name)
                 dataSet._set[name]._valueList[i] = value[j]
-            else:
-                dataSet._set[name]._valueList[i] = value[j]
-                dataSet._set[name]._errorList[i] = value[j+1]
-            j += 2
-    #print(dataSet._set[int(0)]._valueList, dataSet._set[0]._errorList)
+                j += 1
+    else: #creation list of data with errors
+        if names[1] not in dataSet_dict:
+            dataSet_dict[names[1]] = DSet(names[1])
+        dataSet = dataSet_dict[names[1]]
+        num = len(data[1:])
+        #print(num)
+        for i in range(0,len(names[2:]),2):
+            print(i)
+            dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
+            #print(dataSet._set[names[i+2]]._name)  
+            dataSet._set[names[i+2]]._valueList = np.zeros(num)
+            dataSet._set[names[i+2]]._errorList = np.zeros(num)
+        for i in range(num):
+            value = data[i+1].split()
+            #print('--',value)
+            #for j in range(len(dataSet._set)):
+            #    print('--',j)
+            j = 0
+            for name in dataSet._set:
+                #print(name)
+                #print(j)
+                #print(n, dataSet._set[int(n/2)]._name)
+                if value[j+1] == '#':
+                    dataSet._set[name]._valueList[i] = value[j]
+                else:
+                    dataSet._set[name]._valueList[i] = value[j]
+                    dataSet._set[name]._errorList[i] = value[j+1]
+                j += 2
+        #print(dataSet._set[int(0)]._valueList, dataSet._set[0]._errorList)
 
 def printData(set):
     dataSet = dataSet_dict[set[0]]
@@ -199,6 +223,7 @@ def newPlot(info):
     #print('x ', x)
     #title1 = ' '.join(info[3:])
     #title2 = ''.join(info[3:])
+    plt.figure()
     plt.plot(x,y,label=ylabel)
     plt.title(title)
     plt.xlabel(xname)
