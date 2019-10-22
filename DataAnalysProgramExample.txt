@@ -1,0 +1,15 @@
+DATA ANALISY @@necessary to flag to the program this txt as a file containing data to be analized
+
+@@ <- starts a single line comment
+
+NEWDATA Set1 Data1 unit1 Data2 unit2 @@create a new set of data named Set1 with Data1 and Data2 as measured quantities, each with his own unit of measure (unit1 and unit2)
+1 1 1 1 @@first value of Data1 with the corresponding error and first value of Data2 with the corresponding error
+2 2 2 2 @@second value of Data1 with the corresponding error and second alvue of Data2 with the corresponding error
+@@and so on for all the data you acquire
+END @@necessaty to close the data acquisition by the program
+
+NEWDATA Set1 Data3 # @@As the Set1 set was already created in the file in this case NEWDATA will add the Data3 list of measure to Set3; in this case the simbol # means that no unit of measure was assignet to Data3
+1 # @@Add the first value to Data3 wiht no error; also in this case the simbol # implies that no error will be associated to the measur, it will be automatically set to 0.
+2 2 @@Second value of Data3 with the corresponding error.
+END
+
