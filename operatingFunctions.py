@@ -49,7 +49,10 @@ def newData(data):
         dataSet = dataSet_dict[names[2]]
         num = len(data[1:])
         for i in range(0,len(names[3:]),2):
-            dataSet._set[names[i+3]] = DList(names[i+3], names[i+4])
+            if names[i+4] == '#': #checks to see if the DList as no unit of measurement
+                dataSet._set[names[i+3]] = DList(names[i+3])
+            else:
+                dataSet._set[names[i+3]] = DList(names[i+3], names[i+4])
             #print(dataSet._set[names[i+2]]._name)  
             dataSet._set[names[i+3]]._valueList = np.zeros(num)
             dataSet._set[names[i+3]]._errorList = np.zeros(num)
@@ -72,8 +75,11 @@ def newData(data):
         num = len(data[1:])
         #print(num)
         for i in range(0,len(names[2:]),2):
-            print(i)
-            dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
+            #print(i)
+            if names[i+3] == '#': #checks to see if the DList as no unit of measurement
+                dataSet._set[names[i+2]] = DList(names[i+2])
+            else:
+                dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
             #print(dataSet._set[names[i+2]]._name)  
             dataSet._set[names[i+2]]._valueList = np.zeros(num)
             dataSet._set[names[i+2]]._errorList = np.zeros(num)
@@ -209,12 +215,18 @@ def newPlot(info):
     #print(dataSet._name)
     title = info[1]
     title1 = ''.join(info[1].split())
-    #print(title) 
-    xname = info[2].split()[0] + ' (' + dataSet._set[info[2].split()[1]]._unit + ')'
+    #print(title)
+    if dataSet._set[info[2].split()[1]]._unit == '': #checks to see if the DList as no unit of measurement
+        xname = info[2].split()[0]
+    else:
+        xname = info[2].split()[0] + ' (' + dataSet._set[info[2].split()[1]]._unit + ')'
     #print(xname)
     x = dataSet._set[info[2].split()[1]]._valueList
             #print(x)
-    yname = info[3].split()[0] + ' (' + dataSet._set[info[3].split()[2]]._unit + ')'
+    if dataSet._set[info[3].split()[2]]._unit == '': #checks to see if the DList as no unit of measurement
+        yname = info[3].split()[0]
+    else:
+        yname = info[3].split()[0] + ' (' + dataSet._set[info[3].split()[2]]._unit + ')'
     ylabel = info[3].split()[1]
     #print(yname)
     y = dataSet._set[info[3].split()[2]]._valueList
