@@ -13,3 +13,5 @@ NEWDATA Set1 Data3 # @@As the Set1 set was already created in the file in this c
 2 2 @@Second value of Data3 with the corresponding error.
 END
 
+@@All the data 'list' (like Data1) added to the same set need to contain the same amount of values
+@@All the values relative a set of data (like Data1) need to ba added in the same NEWDATA 'scope' otherwise the error will return and error
