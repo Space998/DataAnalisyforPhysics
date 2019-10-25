@@ -15,3 +15,4 @@ END
 
 @@All the data 'list' (like Data1) added to the same set need to contain the same amount of values
 @@All the values relative a set of data (like Data1) need to ba added in the same NEWDATA 'scope' otherwise the error will return and error
+@@If in NEWDATA a value is specified wihtout error it will be ignored and set to zero

@@ -5,7 +5,7 @@ import re
 def checkFile():
     """Checks if the file containing the data and the instruction for the analisy exists, if so returns it otherwise kills the program"""
     if len(sys.argv) != 2:
-        sys.exit("No file indicated")
+        sys.exit("ERROR: No file indicated")
     else:
         if os.path.isfile(sys.argv[1]):
             file = open(sys.argv[1], 'r')
@@ -13,9 +13,9 @@ def checkFile():
             if line.split()[0] == "DATA" and line.split()[1] == "ANALISY":
                 return file #return file
             else:
-                sys.exit("The input file is not formatted correctly for the data analisy")
+                sys.exit("ERROR: The input file is not formatted correctly for the data analisy")
         else:
-            sys.exit("The specified path doesn't lead to a file")
+            sys.exit("ERROR: The specified path doesn't lead to a file")
 
 def formatFile(originalFile):
     """Return a object containing only the information needed by the program/interpreter for the data analisy. 
@@ -23,11 +23,13 @@ def formatFile(originalFile):
     originalFile = originalFile.read()
     
     #originalFile = originalFile.replace('@@', '\n@@')             
-    originalFile = re.sub('@@#','\n@@#\n ',originalFile)        #start to eliminate multiline comments
-    originalFile = re.sub('@@#[\\s\\w]*?@@#','',originalFile)     #eliminate multiline comments  
+    originalFile = re.sub('@@#','\n@@# \n ',originalFile)        #start to eliminate multiline comments
+    originalFile = re.sub('#@@','\n#@@ \n ',originalFile)        #start to eliminate multiline comments
+    originalFile = re.sub('@@#[\\s\\w]*#@@','',originalFile)     #eliminate multiline comments  
+    #print(originalFile)
     originalFile = re.sub('@@','\n@@ ',originalFile)            #eliminates inline comments 
     originalList= originalFile.split('\n')                      #create a list by splitting the file at the end of the lines
-    #print(originalFile)
+    
 
     program = list(filter(lambda x: not re.match(r'^\s*$', x) and not x.startswith('@@ '),originalList))         #eliminates the comments and the empty lines
     

@@ -13,6 +13,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+import sys
+
 #creation of the dictionari that will contain all the dataSet
 dataSet_dict = {}
 
@@ -43,62 +45,86 @@ def operation(file):
 
 def newData(data):
     names = data[0].split()
+    num = len(data[1:])
     if names[1] == '-noerr': #creation list of data without errors, all equal to 0
         if names[2] not in dataSet_dict:
-            dataSet_dict[names[2]] = DSet(names[2])
+            dataSet_dict[names[2]] = DSet(names[2],num)
         dataSet = dataSet_dict[names[2]]
-        num = len(data[1:])
-        for i in range(0,len(names[3:]),2):
-            if names[i+4] == '#': #checks to see if the DList as no unit of measurement
-                dataSet._set[names[i+3]] = DList(names[i+3])
-            else:
-                dataSet._set[names[i+3]] = DList(names[i+3], names[i+4])
-            #print(dataSet._set[names[i+2]]._name)  
-            dataSet._set[names[i+3]]._valueList = np.zeros(num)
-            dataSet._set[names[i+3]]._errorList = np.zeros(num)
-        for i in range(num):
-            value = data[i+1].split()
-            #print('--',value)
-            #for j in range(len(dataSet._set)):
-            #    print('--',j)
-            j = 0
-            for name in dataSet._set:
-                #print(name)
-                #print(j)
-                #print(n, dataSet._set[int(n/2)]._name)
-                dataSet._set[name]._valueList[i] = value[j]
-                j += 1
+        lenght = dataSet_dict[names[2]]._lenght
+        if lenght == num: #DLIsts in the same DSet must have same list lenght
+            for i in range(0,len(names[3:]),2):
+                if names[i+3] not in dataSet._set: #check if this DList already exists
+                    if names[i+4] == '#': #checks to see if the DList as no unit of measurement
+                        dataSet._set[names[i+3]] = DList(names[i+3])
+                    else:
+                        dataSet._set[names[i+3]] = DList(names[i+3], names[i+4])
+                    dataSet._set[names[i+3]]._valueList = np.zeros(lenght)
+                    dataSet._set[names[i+3]]._errorList = np.zeros(lenght)
+                else:
+                    sys.exit("ERROR: Trying to add data to and alrady existing list. Put the data referring to the same physical quantity in the same NEWDATA scope")
+                #print(dataSet._set[names[i+2]]._name)  
+            for i in range(lenght):
+                value = data[i+1].split()
+                #print('--',value)
+                #for j in range(len(dataSet._set)):
+                #    print('--',j)
+                j = 0
+                for name in names[3::2]:
+                    #print(name)
+                    #print(j)
+                    #print(n, dataSet._set[int(n/2)]._name)
+                    if j < len(value): #to avoid aìout out of range list if some data is not specified
+                        dataSet._set[name]._valueList[i] = value[j]
+                        #print(name)
+                        #print(j)
+                        #print(n, dataSet._set[int(n/2)]._name)
+                        #print(value[j+1])
+                    else:
+                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i, ' of ', name, ' a value missis' )
+                    j += 1
+        else:
+            sys.exit('ERROR: Trying to add list of datas with different lenght in the same set')
     else: #creation list of data with errors
         if names[1] not in dataSet_dict:
-            dataSet_dict[names[1]] = DSet(names[1])
+            dataSet_dict[names[1]] = DSet(names[1],num)
         dataSet = dataSet_dict[names[1]]
-        num = len(data[1:])
-        #print(num)
-        for i in range(0,len(names[2:]),2):
-            #print(i)
-            if names[i+3] == '#': #checks to see if the DList as no unit of measurement
-                dataSet._set[names[i+2]] = DList(names[i+2])
-            else:
-                dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
-            #print(dataSet._set[names[i+2]]._name)  
-            dataSet._set[names[i+2]]._valueList = np.zeros(num)
-            dataSet._set[names[i+2]]._errorList = np.zeros(num)
-        for i in range(num):
-            value = data[i+1].split()
-            #print('--',value)
-            #for j in range(len(dataSet._set)):
-            #    print('--',j)
-            j = 0
-            for name in dataSet._set:
-                #print(name)
-                #print(j)
-                #print(n, dataSet._set[int(n/2)]._name)
-                if value[j+1] == '#':
-                    dataSet._set[name]._valueList[i] = value[j]
+        lenght = dataSet_dict[names[1]]._lenght
+        if lenght == num: #DLIsts in the same DSet must have same list lenght
+            for i in range(0,len(names[2:]),2):
+                #print(i)
+                if names[i+2] not in dataSet._set: #check if this DList already exists
+                    if names[i+3] == '#': #checks to see if the DList as no unit of measurement
+                        dataSet._set[names[i+2]] = DList(names[i+2])
+                    else:
+                        dataSet._set[names[i+2]] = DList(names[i+2], names[i+3])
+                    dataSet._set[names[i+2]]._valueList = np.zeros(lenght)
+                    dataSet._set[names[i+2]]._errorList = np.zeros(lenght)
                 else:
-                    dataSet._set[name]._valueList[i] = value[j]
-                    dataSet._set[name]._errorList[i] = value[j+1]
-                j += 2
+                    sys.exit("ERROR: Trying to add data to and alrady existing list. Put the data referring to the same physical quantity in the same NEWDATA scope")
+                #print(dataSet._set[names[i+2]]._name)  
+            for i in range(lenght):
+                value = data[i+1].split()
+                print(len(value))
+                #print('--',value)
+                #for j in range(len(dataSet._set)):
+                #    print('--',j)
+                j = 0
+                for name in names[2::2]:
+                    if j < len(value): #to avoid aìout out of range list if some data is not specified
+                        #print(name)
+                        #print(j)
+                        #print(n, dataSet._set[int(n/2)]._name)
+                        #print(value[j+1])
+                        if value[j+1] == '#':
+                            dataSet._set[name]._valueList[i] = value[j]
+                        else:
+                            dataSet._set[name]._valueList[i] = value[j]
+                            dataSet._set[name]._errorList[i] = value[j+1]
+                    else:
+                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i, ' of ', name, ' a value missis' )
+                    j += 2
+        else:
+            sys.exit('ERROR: Trying to add list of datas with different lenght in the same set')
         #print(dataSet._set[int(0)]._valueList, dataSet._set[0]._errorList)
 
 def printData(set):
@@ -143,7 +169,7 @@ def startAnalisy(null):
 def function(expr):
     #select the correct data set
     dataSet = dataSet_dict[expr[0]] 
-    num = len(list(dataSet._set.values())[0]._valueList)
+    num = dataSet._lenght
     #create a new DList to contain the new calculated value
     if expr[2] == '#':
         newDList = DList(expr[1])
