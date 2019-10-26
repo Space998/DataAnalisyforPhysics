@@ -23,11 +23,11 @@ def formatFile(originalFile):
     originalFile = originalFile.read()
     
     #originalFile = originalFile.replace('@@', '\n@@')             
-    originalFile = re.sub('@@#','\n@@# \n ',originalFile)        #start to eliminate multiline comments
-    originalFile = re.sub('#@@','\n#@@ \n ',originalFile)        #start to eliminate multiline comments
-    originalFile = re.sub('@@#[\\s\\w]*#@@','',originalFile)     #eliminate multiline comments  
-    #print(originalFile)
-    originalFile = re.sub('@@','\n@@ ',originalFile)            #eliminates inline comments 
+    originalFile = re.sub(r"@@#","\n@@# \n ",originalFile)        #start to eliminate multiline comments
+    originalFile = re.sub(r"#@@","\n#@@ \n ",originalFile)        #start to eliminate multiline comments
+    originalFile = re.sub(r"@@#[\s\S]*?#@@","",originalFile)     #eliminate multiline comments  
+    print(originalFile)
+    originalFile = re.sub(r"@@","\n@@ ",originalFile)            #eliminates inline comments 
     originalList= originalFile.split('\n')                      #create a list by splitting the file at the end of the lines
     
 

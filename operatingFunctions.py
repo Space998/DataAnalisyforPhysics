@@ -80,7 +80,7 @@ def newData(data):
                         #print(n, dataSet._set[int(n/2)]._name)
                         #print(value[j+1])
                     else:
-                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i, ' of ', name, ' a value missis' )
+                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i+1, ' of ', name, ' a value missis;  this value and his error will be set to zero.' )
                     j += 1
         else:
             sys.exit('ERROR: Trying to add list of datas with different lenght in the same set')
@@ -104,7 +104,7 @@ def newData(data):
                 #print(dataSet._set[names[i+2]]._name)  
             for i in range(lenght):
                 value = data[i+1].split()
-                print(len(value))
+                #print(len(value))
                 #print('--',value)
                 #for j in range(len(dataSet._set)):
                 #    print('--',j)
@@ -121,7 +121,7 @@ def newData(data):
                             dataSet._set[name]._valueList[i] = value[j]
                             dataSet._set[name]._errorList[i] = value[j+1]
                     else:
-                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i, ' of ', name, ' a value missis' )
+                        print('ATTENTION: In the NEWDATA command relative to the set ', dataSet._name, ' in line ', i+1, ' of ', name, ' a value missis; this value and his error will be set to zero.' )
                     j += 2
         else:
             sys.exit('ERROR: Trying to add list of datas with different lenght in the same set')
