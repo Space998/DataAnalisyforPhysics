@@ -15,9 +15,6 @@ import numpy as np
 
 import sys
 
-#creation of the dictionari that will contain all the dataSet
-dataSet_dict = {}
-
 def operation(file):
     for i in range(len(file)):
         line = file[i].split()
@@ -157,16 +154,10 @@ def printData(set):
             print()
         print()
 
-
-def startAnalisy(null):
-    for i in dataSet_dict:
-        #print(i)
-        for j in dataSet_dict[i]._set:
-            #print(j)
-            #print(dataSet_dict[i]._set[j]._name)
-            Symbol(dataSet_dict[i]._set[j]._name +'_s')
-
 def function(expr):
+    if analisy[0]:
+        startAnalisy(0)
+        analisy[0] = False
     #select the correct data set
     dataSet = dataSet_dict[expr[0]] 
     num = dataSet._lenght
@@ -234,7 +225,14 @@ def function(expr):
         for i in range(len(dataSet._set[0]._list)):
             newDList._list.append(Data(func(variable[i]._list[j]._value)))
     '''
-        
+def startAnalisy(null):
+    for i in dataSet_dict:
+        #print(i)
+        for j in dataSet_dict[i]._set:
+            #print(j)
+            #print(dataSet_dict[i]._set[j]._name)
+            Symbol(dataSet_dict[i]._set[j]._name +'_s')
+       
 def newPlot(info):
     #print(info[0].split()[1])
     dataSet = dataSet_dict[info[0].split()[1]]
@@ -287,5 +285,11 @@ def newPlot(info):
     fig.savefig(title2+".png")
     plt.show()
     '''
-functionDict = {'PRINTDATA': printData, 'STARTANALISY': startAnalisy, 'FUNCTION': function}
+
+#creation of the dictionari that will contain all the dataSet
+dataSet_dict = {}
+analisy = [True]
+
+functionDict = {'PRINTDATA': printData, 'FUNCTION': function}
+#'STARTANALISY': startAnalisy
 #add ability to create custom dataSets  

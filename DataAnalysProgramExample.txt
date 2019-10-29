@@ -16,3 +16,22 @@ END
 @@All the data 'list' (like Data1) added to the same set need to contain the same amount of values
 @@All the values relative a set of data (like Data1) need to ba added in the same NEWDATA 'scope' otherwise the error will return and error
 @@If in NEWDATA a value is specified wihtout error it will be ignored and set to zero
+
+PRINTDATA Set1 @@Print all the data set
+
+PRINTDATA Set1 Data1 Data3 @@Print the Data1 and Data3 data list
+
+Function Set1 Cal1 unitCalc1 function @@Create a new list of data in Set1 named Cal1 with unitCal1 as unit of measure of Cal1 caluculated as a result of function
+@@The variables that need to be used in the function are data list (like Data1) or that were defined with DEFINEVARIBLE 
+@@All the variables need to be decleared before being used
+
+PLOT Set1
+title of the plot
+xaxisName 'list of value for x -> like Data1'
+yaxisName 'legend name for this set of values' 'list of value for y -> like Data2'
+@@Another values to be plotted in function of the xvalues -> the syntax is the same for all the yvalues
+END
+@@In this way A graph willl be created with ploted the yvalues in function of the xvalues
+@@Every time a new PLOT command is called a new image is created
+@@Only data from the same Set can be plotted together
+
