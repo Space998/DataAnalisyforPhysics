@@ -26,12 +26,13 @@ def formatFile(originalFile):
     originalFile = re.sub(r"@@#","\n@@# \n ",originalFile)        #start to eliminate multiline comments
     originalFile = re.sub(r"#@@","\n#@@ \n ",originalFile)        #start to eliminate multiline comments
     originalFile = re.sub(r"@@#[\s\S]*?#@@","",originalFile)     #eliminate multiline comments  
-    print(originalFile)
+    #print(originalFile)
     originalFile = re.sub(r"@@","\n@@ ",originalFile)            #eliminates inline comments 
     originalList= originalFile.split('\n')                      #create a list by splitting the file at the end of the lines
     
 
     program = list(filter(lambda x: not re.match(r'^\s*$', x) and not x.startswith('@@ '),originalList))         #eliminates the comments and the empty lines
-    
+    #for i in range(len(program)):
+    #    print(i,'-',program[i])
     return program
 

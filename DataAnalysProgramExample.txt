@@ -1,6 +1,7 @@
 DATA ANALISY @@necessary to flag to the program this txt as a file containing data to be analized
 
 @@ <- starts a single line comment
+@@Every word insterted in the program exapt for the plots' titles must be without spaces
 
 NEWDATA Set1 Data1 unit1 Data2 unit2 @@create a new set of data named Set1 with Data1 and Data2 as measured quantities, each with his own unit of measure (unit1 and unit2)
 1 1 1 1 @@first value of Data1 with the corresponding error and first value of Data2 with the corresponding error
@@ -21,9 +22,12 @@ PRINTDATA Set1 @@Print all the data set
 
 PRINTDATA Set1 Data1 Data3 @@Print the Data1 and Data3 data list
 
-Function Set1 Cal1 unitCalc1 function @@Create a new list of data in Set1 named Cal1 with unitCal1 as unit of measure of Cal1 caluculated as a result of function
+@@Before starting the calculations all the data and variables must be defined
+@@If new data is imported in the program after the first FUNCTION is called will not be considered fot future calculations
+
+FUNCTION Set1 Cal1 unitCalc1 function @@Create a new list of data in Set1 named Cal1 with unitCal1 as unit of measure of Cal1 caluculated as a result of function
 @@The variables that need to be used in the function are data list (like Data1) or that were defined with DEFINEVARIBLE 
-@@All the variables need to be decleared before being used
+@@unitCalc1 must always be defined otherwise the program will bug -> the specify that there is no unit of measure # can be used
 
 PLOT Set1
 title of the plot

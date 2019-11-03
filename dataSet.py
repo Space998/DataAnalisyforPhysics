@@ -6,7 +6,7 @@ All the DList must be the same lenght or the function newData will return an err
 """
 
 class DSet(object):
-    def __init__(self, name, lenght):
+    def __init__(self, name, lenght=0):
         self._name = name
         self._lenght = lenght
         self._set = {}
