@@ -113,7 +113,7 @@ Mucca
 
 PRINTDATA DatiN
 
-PLOT -show Dati 
+PLOT Dati 
 Grafico di Prova
 Voltage VoltageRed 
 Current RedDiod Current

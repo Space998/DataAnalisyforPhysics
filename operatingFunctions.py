@@ -245,10 +245,7 @@ def startAnalisy(null):
        ##need to add sorting of data before plotting with argsort from numpy
 def newPlot(info):
     #print(info[0].split()[1])
-    if info[0].split()[1] == '-show': #checks if -show flag his activated and set correctli the DSet
-        dataSet = dataSet_dict[info[0].split()[2]] #set the DSet of reference
-    else: 
-        dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
+    dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
     #print(dataSet._name)
     title = info[1] #set graph title
     title1 = ''.join(info[1].split()) #creates the name which will be use to save the graph
@@ -300,8 +297,9 @@ def newPlot(info):
     plt.grid()
     plt.legend()
     plt.savefig(title1, dpi=100)
-    if info[0].split()[1] == '-show': #If the -show flag his activated plt.show() it's executed
-        plt.show()
+    #if info[0].split()[1] == '-show': #If the -show flag his activated plt.show() it's executed
+    #    plt.show(3)
+    #    plt.draw()
     '''
     ax.set(xlabel= xname, ylabel= yname,
         title= title1)

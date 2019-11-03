@@ -39,6 +39,4 @@ END
 @@In this way A graph will be created with ploted the yvalues in function of the xvalues
 @@Every time a new PLOT command is called a new image is created
 @@Only data from the same Set can be plotted together
-@@The -show flag can be added before the set in the defenition of the functin to open the interactive math plot lib window for further changes not implemented in the program
-@@example PLOT -show Set1
 @@it is taken for granted that the unit mesure of the funciton is the same of the other ydata
