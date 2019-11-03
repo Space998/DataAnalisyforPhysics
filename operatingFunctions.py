@@ -242,9 +242,13 @@ def startAnalisy(null):
             #print(dataSet_dict[i]._set[j]._name)
             Symbol(dataSet_dict[i]._set[j]._name +'_s') #creates the variable adding an _s to the end
        
+       ##need to add sorting of data before plotting with argsort from numpy
 def newPlot(info):
     #print(info[0].split()[1])
-    dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
+    if info[0].split()[1] == '-show': #checks if -show flag his activated and set correctli the DSet
+        dataSet = dataSet_dict[info[0].split()[2]] #set the DSet of reference
+    else: 
+        dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
     #print(dataSet._name)
     title = info[1] #set graph title
     title1 = ''.join(info[1].split()) #creates the name which will be use to save the graph
@@ -279,16 +283,25 @@ def newPlot(info):
     #if len(info) > 3: 
     for i in range(len(info[4:])): #checks if the function is not just the standatd -> if more commands need to be executed
         #print(3+i)
-        if dataSet._set[info[4+i].split()[1]]._unit == dataSet._set[info[3].split()[2]]._unit: #checks if the unit of measure is the same for the two yvalues
-            ylabel1 = info[4+i].split()[0]
-            y1 = dataSet._set[info[4+i].split()[1]]._valueList
+        if info[4+i].split()[0] == 'FUNCTION': #check if the user whant a functin to be plotted
+            expr = ''.join(info[4+i].split()[2:]) #create function expression
+            expr = re.sub(info[2].split()[1],info[2].split()[1]+'_s',expr) #substitute the variable 
+            func = lambdify(info[2].split()[1]+'_s', expr, "numpy") #cretes the function
+            y1 = func(x) #evaluate the function
+            ylabel1 = info[4+i].split()[1]
             plt.plot(x,y1,label=ylabel1)
         else:
-            print("Can't plot ", dataSet._set[info[3].split()[2]]._name, " with ", dataSet._set[info[4+i].split()[1]]._name, " because don't have the same unit of measurement")
+            if dataSet._set[info[4+i].split()[1]]._unit == dataSet._set[info[3].split()[2]]._unit: #checks if the unit of measure is the same for the two yvalues
+                ylabel1 = info[4+i].split()[0]
+                y1 = dataSet._set[info[4+i].split()[1]]._valueList
+                plt.plot(x,y1,label=ylabel1)
+            else:
+                print("Can't plot ", dataSet._set[info[3].split()[2]]._name, " with ", dataSet._set[info[4+i].split()[1]]._name, " because don't have the same unit of measurement")
     plt.grid()
     plt.legend()
     plt.savefig(title1, dpi=100)
-    #plt.show()
+    if info[0].split()[1] == '-show': #If the -show flag his activated plt.show() it's executed
+        plt.show()
     '''
     ax.set(xlabel= xname, ylabel= yname,
         title= title1)

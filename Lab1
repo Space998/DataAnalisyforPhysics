@@ -113,7 +113,7 @@ Mucca
 
 PRINTDATA DatiN
 
-PLOT Dati 
+PLOT -show Dati 
 Grafico di Prova
 Voltage VoltageRed 
 Current RedDiod Current
@@ -124,7 +124,16 @@ PLOT DatiN
 Grafico di ProvaN
 Voltage VoltageRedN 
 Current RedDiod CurrentN
+FUNCTION function VoltageRedN**2
 END
+
+PLOT DatiN 
+Grafico di ProvaN1
+Voltage VoltageRedN 
+Current RedDiod CurrentN
+FUNCTION function VoltageRedN/2
+END
+
 
 @@#
 @@PLOT Set 

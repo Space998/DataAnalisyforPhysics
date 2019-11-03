@@ -1,7 +1,7 @@
 DATA ANALISY @@necessary to flag to the program this txt as a file containing data to be analized
 
 @@ <- starts a single line comment
-@@Every word insterted in the program exapt for the plots' titles must be without spaces
+@@Every word insterted in the program exapt for the plots' titles and the functins must be without spaces
 
 NEWDATA Set1 Data1 unit1 Data2 unit2 @@create a new set of data named Set1 with Data1 and Data2 as measured quantities, each with his own unit of measure (unit1 and unit2)
 1 1 1 1 @@first value of Data1 with the corresponding error and first value of Data2 with the corresponding error
@@ -34,8 +34,11 @@ title of the plot
 xaxisName 'list of value for x -> like Data1'
 yaxisName 'legend name for this set of values' 'list of value for y -> like Data2'
 @@Another values to be plotted in function of the xvalues -> the syntax is the same for all the yvalues
+FUNCTION 'legend name for this set of values' 'function expression' @@To plot a funciton (the xvalues for the funciton are the one specified above) the value of the function must be the name of the xvalues -> like Data1
 END
-@@In this way A graph willl be created with ploted the yvalues in function of the xvalues
+@@In this way A graph will be created with ploted the yvalues in function of the xvalues
 @@Every time a new PLOT command is called a new image is created
 @@Only data from the same Set can be plotted together
-
+@@The -show flag can be added before the set in the defenition of the functin to open the interactive math plot lib window for further changes not implemented in the program
+@@example PLOT -show Set1
+@@it is taken for granted that the unit mesure of the funciton is the same of the other ydata
