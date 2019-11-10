@@ -244,8 +244,11 @@ def startAnalisy(null):
        
        ##need to add sorting of data before plotting with argsort from numpy
 def newPlot(info):
+    if info[0].split()[1] == '-show': #If the -show flag
     #print(info[0].split()[1])
-    dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
+        dataSet = dataSet_dict[info[0].split()[2]] #set the DSet of reference
+    else:
+        dataSet = dataSet_dict[info[0].split()[1]] #set the DSet of reference
     #print(dataSet._name)
     title = info[1] #set graph title
     title1 = ''.join(info[1].split()) #creates the name which will be use to save the graph
@@ -272,6 +275,13 @@ def newPlot(info):
     #print('x ', x)
     #title1 = ' '.join(info[3:])
     #title2 = ''.join(info[3:])
+    
+    #array sorting before plotting (the sort is based on the xvalues)
+    inds = x.argsort()
+    x = x[inds] #sort x
+    y = y[inds] #sort y
+
+    #plotting
     plt.figure()
     plt.plot(x,y,label=ylabel)
     plt.title(title)
@@ -291,15 +301,16 @@ def newPlot(info):
             if dataSet._set[info[4+i].split()[1]]._unit == dataSet._set[info[3].split()[2]]._unit: #checks if the unit of measure is the same for the two yvalues
                 ylabel1 = info[4+i].split()[0]
                 y1 = dataSet._set[info[4+i].split()[1]]._valueList
+                y1 = y1[inds] #sort the y1 values 
                 plt.plot(x,y1,label=ylabel1)
             else:
                 print("Can't plot ", dataSet._set[info[3].split()[2]]._name, " with ", dataSet._set[info[4+i].split()[1]]._name, " because don't have the same unit of measurement")
     plt.grid()
     plt.legend()
     plt.savefig(title1, dpi=100)
-    #if info[0].split()[1] == '-show': #If the -show flag his activated plt.show() it's executed
-    #    plt.show(3)
-    #    plt.draw()
+    if info[0].split()[1] == '-show': #If the -show flag his activated plt.show() it's executed
+        plt.show()
+    plt.close()
     '''
     ax.set(xlabel= xname, ylabel= yname,
         title= title1)

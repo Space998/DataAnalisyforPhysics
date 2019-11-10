@@ -127,7 +127,7 @@ Current RedDiod CurrentN
 FUNCTION function VoltageRedN**2
 END
 
-PLOT DatiN 
+PLOT -show DatiN 
 Grafico di ProvaN1
 Voltage VoltageRedN 
 Current RedDiod CurrentN

@@ -40,3 +40,4 @@ END
 @@Every time a new PLOT command is called a new image is created
 @@Only data from the same Set can be plotted together
 @@it is taken for granted that the unit mesure of the funciton is the same of the other ydata
+@@whit the -show flag after the PLOT command the graph will also be show in a window (the command plt.show() is executed)
