@@ -134,6 +134,7 @@ Current RedDiod CurrentN
 FUNCTION function VoltageRedN/2
 END
 
+PRINTDATA DatiN
 
 @@#
 @@PLOT Set 

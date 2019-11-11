@@ -283,7 +283,7 @@ def newPlot(info):
 
     #plotting
     plt.figure()
-    plt.plot(x,y,label=ylabel)
+    plt.plot(x,y,label=ylabel, color=colorDict['red'])
     plt.title(title)
     plt.xlabel(xname)
     plt.ylabel(yname)
@@ -325,5 +325,6 @@ dataSet_dict = {} #dictionary containing all the DSet
 analisy = [True]  #awful way to have a global variable to check if the varaibles have alrady been instantitated
 
 functionDict = {'PRINTDATA': printData, 'FUNCTION': function} #dictionary of all the exacutable functions
+colorDict = {'red': '#000000'}
 #'STARTANALISY': startAnalisy
-#add ability to create custom dataSets  
+#add ability to creat1e custom dataSets  
