@@ -1,5 +1,6 @@
 DATA ANALISY
 
+@@pickle
 NEWDATA Dati Current mA VoltageRed V
 0 # 0.039 # 
 0.01 # 1.4 # 

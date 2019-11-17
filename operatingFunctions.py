@@ -49,7 +49,7 @@ def operation(file):
             i+=1
 
 def newData(data):
-    names = data[0].split() #create a list conteinig all the value informations: name of the set and of the list with the associated unti
+    names = data[0].split() #create a list conteinig all the value informations: name of the set and of the list with the associated unit
     num = len(data[1:])
     if names[1] == '-noerr': #creation list of data without errors, all equal to 0
         if names[2] not in dataSet_dict: #creation of the DSEt if not already existing
@@ -283,7 +283,8 @@ def newPlot(info):
 
     #plotting
     plt.figure()
-    plt.plot(x,y,label=ylabel, color=colorDict['red'])
+    plt.plot(x,y,label=ylabel, linestyle='-', marker='o')
+    #plt.xscale('log')
     plt.title(title)
     plt.xlabel(xname)
     plt.ylabel(yname)
